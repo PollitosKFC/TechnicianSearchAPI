@@ -1,5 +1,6 @@
 package pe.edu.upc.techniciansearchapi.EasyJobs.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,13 +19,20 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class TechnicianQualification{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Column(unique = true, length = 40)
+    @Column(name = "numberOfReviews", length = 40)
+    private Integer numberOfReviews;
+
+    @NotNull
+    @Column(name = "qualificationAverage", length = 40)
     private Double qualificationAverage;
 
+    @NotNull
+    @Column(name = "CurrentQualification", length = 40)
+    private Double CurrentQualification;
+    @JsonBackReference
     @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     @JoinColumn(name = "technician_id",unique = true)
     private Technician technician;

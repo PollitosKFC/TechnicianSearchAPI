@@ -10,10 +10,11 @@ import java.util.List;
 @Qualifier("technicianRepository")
 @Repository
 public interface TechnicianSearchRepository  extends JpaRepository<Technician, Long> {
-   @Query(value ="SELECT p FROM Technician p JOIN TechnicianQualification q WHERE q.qualificationAverage > ?1")
+   @Query(value ="SELECT p FROM Technician p JOIN fetch p.technician_qualification q WHERE q.qualificationAverage > ?1")
    List<Technician> findByQualification(Double qualificationAverage);
-   @Query(value = "SELECT p FROM Technician p JOIN TechnicianSpecialty s WHERE s.Name = ?1")
+   @Query(value = "SELECT p FROM Technician p JOIN fetch p.technician_specialties s WHERE s.Name = ?1")
    List<Technician> findBySpecialty(String specialty);
    List<Technician> findByFirstNameOrLastName(String firstName, String lastName);
    List<Technician> findByCityOrDistrict(String city, String district);
+
 }

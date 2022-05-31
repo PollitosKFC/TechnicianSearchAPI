@@ -1,5 +1,6 @@
 package pe.edu.upc.techniciansearchapi.EasyJobs.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,10 +22,10 @@ public class TechnicianSpecialty {
     private Long id;
 
     @NotNull
-    @Column(unique = true, length = 200)
+    @Column(name = "Name", length = 200)
     private String Name;
-
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "technician_id",unique = true)
+    @JoinColumn(name = "technician_id")
     private Technician technician;
 }
