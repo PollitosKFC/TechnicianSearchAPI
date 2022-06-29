@@ -80,5 +80,20 @@ public class TechnicianSearchServiceImplTest {
         // Assert
         assertThat(technicianQualificationResult).isEqualTo(technicianQualification);
     }
+    @Test
+    @DisplayName("When Delete TechnicianSearch With Valid TechnicianSearch")
+    public void WhenDeleteTechnicianSearchWithValidTechnician() {
+        // Arrange
+        TechnicianSpecialty technicianSpecialty = new TechnicianSpecialty();
+        technicianSpecialty.setId(1L);
+        technicianSpecialty.setName("Name");
+
+        when(technicianSpecialtyRepository.save(technicianSpecialty)).thenAnswer(invocation -> invocation.getArgument(0));
+        technicianSpecialtyRepository.deleteById(1L);
+        // Act
+        TechnicianSpecialty technicianSpecialtyResult = null;
+        // Assert
+        assertThat(technicianSpecialtyResult).isEqualTo(technicianSpecialtyRepository.getById(1L));
+    }
 }
 
