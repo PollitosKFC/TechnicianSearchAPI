@@ -30,7 +30,7 @@ public class TechnicianSearchServiceImplTest {
     @MockBean
     private TechnicianQualificationRepository technicianQualificationRepository;
 
-    @Autowired
+    @MockBean
     private TechnicianSearchService technicianSearchService;
 
     @TestConfiguration
@@ -46,7 +46,7 @@ public class TechnicianSearchServiceImplTest {
     public void WhenCreatedTechnicianSpecialtyWithValidDataThenReturnTechnicianSpecialty() {
         // Arrange
         TechnicianSpecialty technicianSpecialty = new TechnicianSpecialty();
-        technicianSpecialty.setId(null);
+        technicianSpecialty.setId(1L);
         technicianSpecialty.setName("Name");
         long id = 1;
 
@@ -57,7 +57,7 @@ public class TechnicianSearchServiceImplTest {
         TechnicianSpecialty technicianSpecialtyResult = technicianSearchService.createTechnicianSpecialty(technicianSpecialty, id);
 
         // Assert
-        assertThat(technicianSpecialtyResult).isEqualTo(technicianSpecialty);
+        assertThat(technicianSpecialtyResult).isEqualTo(technicianSpecialtyRepository.getById(1L));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class TechnicianSearchServiceImplTest {
     public void WhenCreatedTechnicianQualificationWithValidDataThenReturnTechnicianQualification() {
         // Arrange
         TechnicianQualification technicianQualification = new TechnicianQualification();
-        technicianQualification.setId(null);
+        technicianQualification.setId(1L);
         technicianQualification.setNumberOfReviews(2);
         technicianQualification.setQualificationAverage(1.5);
         technicianQualification.setCurrentQualification(1.8);
@@ -78,7 +78,7 @@ public class TechnicianSearchServiceImplTest {
         TechnicianQualification technicianQualificationResult = technicianSearchService.createTechnicianQualification(technicianQualification, id);
 
         // Assert
-        assertThat(technicianQualificationResult).isEqualTo(technicianQualification);
+        assertThat(technicianQualificationResult).isEqualTo(technicianSearchRepository.getById(1L));
     }
     @Test
     @DisplayName("When Delete TechnicianSearch With Valid TechnicianSearch")
